@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	input, _ := os.ReadFile("input.txt")
+	input, _ := os.ReadFile("input_puzzle_1.txt")
 	nums := []string{"1", "2", "3", "4", "5", "6", "7", "8", "9",
 		"one", "two", "three", "four", "five", "six", "seven", "eight", "nine"}
 
