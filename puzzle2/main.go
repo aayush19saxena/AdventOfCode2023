@@ -10,7 +10,7 @@ import (
 )
 
 func main() {
-	f2("input_puzzle2.txt")
+	puzzle2("input_puzzle2.txt")
 }
 
 type cubeSet struct {
@@ -72,26 +72,25 @@ func lineToCubes(line string) cubeSet {
 	return game
 }
 
-func isGameWithin(game cubeSet, within cubeSet) bool {
+func isWithinBoundary(game cubeSet, within cubeSet) bool {
 	if game.blue <= within.blue && game.green <= within.green && game.red <= within.red {
 		return true
 	}
 	return false
 }
 
-func f2(file string) (int, int) {
-
-	within := cubeSet{0, 12, 13, 14}
-	p1, p2 := 0, 0
+func puzzle2(file string) (int, int) {
+	boundaries := cubeSet{0, 12, 13, 14}
+	sum, powerSum := 0, 0
 	data := readLines(file)
 	for _, line := range data {
 		cubeSet := lineToCubes(line)
-		if ok := isGameWithin(cubeSet, within); ok {
-			p1 += cubeSet.id
+		if ok := isWithinBoundary(cubeSet, boundaries); ok {
+			sum += cubeSet.id
 		}
-		p2 += cubeSet.red * cubeSet.blue * cubeSet.green
+		powerSum += cubeSet.red * cubeSet.blue * cubeSet.green
 	}
 
-	fmt.Printf("Part1: %d, Part2: %d\n", p1, p2)
-	return p1, p2
+	fmt.Printf("Part1: %d, Part2: %d\n", sum, powerSum)
+	return sum, powerSum
 }
